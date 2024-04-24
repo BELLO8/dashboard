@@ -90,3 +90,7 @@ body {
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-800 rounded-xl;
 }
+
+.active {
+  @apply bg-muted text-black;
+}

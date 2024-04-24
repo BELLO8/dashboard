@@ -1,16 +1,10 @@
 import {
     CircleUser,
-    Home,
-    LineChart,
     Menu,
-    Package,
     Package2,
-    Search,
-    ShoppingCart,
-    Users
+    Search
 } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -29,7 +23,9 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Link } from "react-router-dom"
+import { LinkBreak2Icon } from "@radix-ui/react-icons"
+import { Link, NavLink } from "react-router-dom"
+import { navs } from "./SideBarMenu"
 
 export const Header = () => {
     return (
@@ -54,44 +50,17 @@ export const Header = () => {
                             <Package2 className="h-6 w-6" />
                             <span className="sr-only">Acme Inc</span>
                         </Link>
-                        <a
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Home className="h-5 w-5" />
-                            Tableau de bord
-                        </a>
-                        <a
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-                        >
-                            <ShoppingCart className="h-5 w-5" />
-                            Orders
-                            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                                6
-                            </Badge>
-                        </a>
-                        <a
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Package className="h-5 w-5" />
-                            Products
-                        </a>
-                        <a
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <Users className="h-5 w-5" />
-                            Customers
-                        </a>
-                        <a
-                            href="#"
-                            className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                        >
-                            <LineChart className="h-5 w-5" />
-                            Analytics
-                        </a>
+                        {
+                            navs.map((navigation) => (
+                                <NavLink
+                                    to={navigation.link}
+                                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                                >
+                                    {navigation.icon}
+                                    {navigation.name}
+                                </NavLink>
+                            ))
+                        }
                     </nav>
                     <div className="mt-auto">
                         <Card>
@@ -103,9 +72,12 @@ export const Header = () => {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <Button size="sm" className="w-full">
-                                    Upgrade
-                                </Button>
+                                <Link to={'/login1'}>
+                                    <Button size="sm" className="w-full gap-2">
+                                        <LinkBreak2Icon /> Deconnexion
+                                    </Button>
+                                </Link>
+
                             </CardContent>
                         </Card>
                     </div>
@@ -133,7 +105,7 @@ export const Header = () => {
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Mon compte</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Paramèttre</DropdownMenuItem>
+                    <DropdownMenuItem><Link to={'/paramettre'}>Paramèttre</Link></DropdownMenuItem>
                     <DropdownMenuItem>Support</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

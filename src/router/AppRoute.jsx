@@ -3,6 +3,7 @@ import { Notfound } from "@/views/Error/Notfound";
 import { Dashboard } from "@/views/Home/Home1";
 import { LoginPage } from "@/views/LoginPage/Login";
 import { LoginPage1 } from "@/views/LoginPage/LoginPage1";
+import { Paramettre } from "@/views/Paramettre/Paramettre";
 import { createHashRouter } from "react-router-dom";
 
 export const AppRoute = createHashRouter([
@@ -14,6 +15,10 @@ export const AppRoute = createHashRouter([
             {
                 path: "/",
                 element: <Dashboard />,
+            },
+            {
+                path: "/paramettre",
+                element: <Paramettre />,
             },
 
         ],

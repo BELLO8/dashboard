@@ -9,10 +9,9 @@ export const Counter = ({ title, count, text, icon }) => {
                 </div>
                 <div className="mx-2">
                     <p className="text-sm font-semibold">{title}</p>
-                    <div className="text-2xl font-bold">{count}</div>
+                    <div className="text-lg font-bold">{count}</div>
                     <p className="text-xs text-muted-foreground">{text}</p>
                 </div>
-
             </Card>
         </>
     )

@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,44 +12,23 @@ import { MoreHorizontal } from "lucide-react"
 
 export const columns = [
     {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: "status",
+        accessorKey: "image",
         header: ({ column }) => {
             return (
                 <Button
-                    className="-mx-2"
+                    className=""
                     variant="ghost"
                     size="sm"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Status
+                    Image
                     <CaretSortIcon className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
         cell: ({ row }) => (
-            <p className="bg-white shadow w-fit border rounded px-3 py-1 text-dark">{row.original.status}</p>
+            <div style={{ backgroundImage: `url("${row.getValue('image')}")`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} className="bg-gray-200 rounded-full w-12 h-12 border-2 mx-2">
+            </div>
         ),
     },
     {
@@ -63,14 +41,14 @@ export const columns = [
                     size="sm"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Nom et prenoms
+                    Nom du produit
                     <CaretSortIcon className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
     },
     {
-        accessorKey: "email",
+        accessorKey: "description",
         header: ({ column }) => {
             return (
                 <div className="-mx-3">
@@ -79,7 +57,7 @@ export const columns = [
                         variant="ghost"
                         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
-                        Email
+                        Description
                         <CaretSortIcon className="ml-2 h-4 w-4" />
                     </Button>
                 </div>
@@ -88,23 +66,39 @@ export const columns = [
         },
     },
     {
+        accessorKey: "quantity",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="-mx-2"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Quantité
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => (
+            <p className="bg-white w-fit border rounded-md px-2 text-xs font-extrabold text-orange-700 py-1 text-dark">{row.getValue("quantity")}</p>
+        ),
+    },
+    {
         accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        header: () => <div className="">Prix</div>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("amount"))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(amount)
+            const formatted = new Intl.NumberFormat('fr', { style: 'currency', currency: 'XOF' }).format(amount)
 
-            return <div className="text-right font-medium">{formatted}</div>
+            return <div className="font-medium">{formatted}</div>
         },
     },
     {
         id: "actions",
+        header: 'Action',
         cell: ({ row }) => {
             const payment = row.original
-
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -118,11 +112,15 @@ export const columns = [
                         <DropdownMenuItem
                             onClick={() => navigator.clipboard.writeText(payment.id)}
                         >
-                            Copy payment ID
+                            Voir le produit
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            Modifier le produit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            Supprimer le produit
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
