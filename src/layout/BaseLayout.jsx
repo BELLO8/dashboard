@@ -1,25 +1,18 @@
-import { Dashboard } from "@/views/Home/Home1";
-import { createHashRouter } from "react-router-dom";
-import { Layout } from "../layout/Layout";
-import { Login } from "../views/auth/login/Login";
-import ErrorPage from "../views/notFound/ErrorPage";
 
-export const AppRoute = createHashRouter([
-    {
-        path: "/",
-        element: <Layout />,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: "/",
-                element: <Dashboard />,
-            },
+import { Header } from "@/components/menu/Header"
+import { SideBarMenu } from "@/components/menu/SideBarMenu"
+import { Outlet } from "react-router-dom"
 
-        ],
-    },
-
-    {
-        path: "/login",
-        element: <Login />,
-    },
-]);
+export const BaseLayout = () => {
+    return (
+        <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+            <SideBarMenu />
+            <div className="flex flex-col">
+                <Header />
+                <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+                    <Outlet />
+                </main>
+            </div>
+        </div>
+    )
+}
