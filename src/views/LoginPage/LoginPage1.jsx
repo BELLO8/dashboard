@@ -1,12 +1,45 @@
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { ReloadIcon } from "@radix-ui/react-icons"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { z } from "zod";
+const FormSchema = z.object({
+    username: z.string().min(2, {
+        message: "Le nom d'utilisateur doit comporter au moins 2 caractères.",
+    }),
+    password: z.string().min(8, {
+        message: "Le mot de passe doit comporter au moins 2 caractères.",
+    }),
+})
 
 export function LoginPage1() {
+
+    const form = useForm({
+        resolver: zodResolver(FormSchema),
+        defaultValues: {
+            username: "",
+            password: ""
+        },
+    })
     const [isSubmit, setSubmit] = useState(false)
+
+
+    function onSubmit(data) {
+        console.log(data);
+        setSubmit(true);
+        isSubmit === true ? window.location.replace('/') : window.location.replace('/login')
+    }
 
     return (
         <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
@@ -19,45 +52,65 @@ export function LoginPage1() {
                         </p>
                     </div>
                     <div className="grid gap-4">
-                        <div className="grid gap-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="m@example.com"
-                                required
-                            />
-                        </div>
-                        <div className="grid gap-2">
-                            <div className="flex items-center">
-                                <Label htmlFor="password">Password</Label>
-                                <a
-                                    to="/forgot-password"
-                                    className="ml-auto inline-block text-sm underline"
-                                >
-                                    Mot de passe oublié?
-                                </a>
-                            </div>
-                            <Input id="password" type="password" required />
-                        </div>
-                        <Button type="submit" disabled={!isSubmit ? false : true} className="w-full bg-red-700">
-                            {
-                                !isSubmit ? 'Connexion' : (<>
-                                    <ReloadIcon className="mx-1 animate-spin" />
-                                    <p>connexion en cours</p>
-                                </>
-                                )
-                            }
-                        </Button>
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)}>
+                                <div className="space-y-4 my-5">
+                                    <FormField
+                                        control={form.control}
+                                        name="username"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Username</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="shadcn@200" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    <FormField
+                                        control={form.control}
+                                        name="password"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Mot de passe </FormLabel>
+                                                <FormControl>
+                                                    <Input type="password" placeholder="Mot de passe" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className="flex items-center mb-2">
+                                    <Link href={""} className="ml-auto inline-block text-sm underline">
+                                        Mot de passe oublié?
+                                    </Link>
+                                </div>
+                                <div className="flex">
+                                    <Button type="submit" disabled={!isSubmit ? false : true} size="lg" className="grow bg-red-700">
+                                        {
+                                            !isSubmit ? 'Connexion' : (<>
+                                                <ReloadIcon className="mx-1 animate-spin" />
+                                                <p>connexion en cours</p>
+                                            </>
+                                            )
+                                        }
+
+                                    </Button>
+                                </div>
+                            </form>
+                        </Form>
                         <Button variant="outline" className="w-full">
                             Connexion avec Google
                         </Button>
                     </div>
                     <div className="mt-4 text-center text-sm">
                         Vous n'avize pas  de compte?{" "}
-                        <a href="#" className="underline">
+                        <Link to={''} className="underline">
                             S'inscrire
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

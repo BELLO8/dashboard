@@ -2,7 +2,6 @@ import {
     Bell,
     Package,
     Package2,
-    ShoppingCart,
     Users
 } from "lucide-react"
 
@@ -14,7 +13,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { LinkBreak2Icon, TokensIcon } from "@radix-ui/react-icons"
+import { ArchiveIcon, LinkBreak2Icon, TokensIcon } from "@radix-ui/react-icons"
 import { Link, NavLink } from "react-router-dom"
 
 export const navs = [
@@ -25,15 +24,14 @@ export const navs = [
     },
     {
         name: "Produits",
-        link: "/categorie-vehicule",
+        link: "/produits",
         icon: <Package className="h-4 w-4" />
         ,
     },
     {
         name: "Commandes",
         link: "/commandes",
-        icon: <ShoppingCart className="h-4 w-4" />
-        ,
+        icon: <ArchiveIcon className="h-4 w-4" />
     },
     {
         name: "Clients",
@@ -85,7 +83,7 @@ export const SideBarMenu = () => {
                         </CardHeader>
                         <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
                             <Link to={'/login'}>
-                                <Button size="sm" className="w-full gap-2">
+                                <Button size="sm" variant='destructive' className="w-full gap-2">
                                     <LinkBreak2Icon /> Deconnexion
                                 </Button>
                             </Link>

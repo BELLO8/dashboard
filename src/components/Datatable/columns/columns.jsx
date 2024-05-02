@@ -1,5 +1,14 @@
 import { Button } from "@/components/ui/button"
 import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
@@ -7,6 +16,16 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
 import { CaretSortIcon } from "@radix-ui/react-icons"
 import { MoreHorizontal } from "lucide-react"
 
@@ -103,23 +122,78 @@ export const columns = [
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
+                        <DropdownMenuItem onSelect={(e) => e.preventDefault()}
                             onClick={() => navigator.clipboard.writeText(payment.id)}
                         >
-                            Voir le produit
+                            <Sheet>
+                                <SheetTrigger asChild>
+                                    <h1>voir le produit</h1>
+                                </SheetTrigger>
+                                <SheetContent>
+                                    <SheetHeader>
+                                        <SheetTitle>Ajouter un produit</SheetTitle>
+                                        <SheetDescription>
+                                            Make changes to your profile here. Click save when you're done.
+                                        </SheetDescription>
+                                    </SheetHeader>
+                                    <div className="grid gap-4 py-4">
+
+                                    </div>
+                                    <SheetFooter>
+                                        <SheetClose asChild>
+                                            <Button type="submit">Enregistrer</Button>
+                                        </SheetClose>
+                                    </SheetFooter>
+                                </SheetContent>
+                            </Sheet>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            Modifier le produit
+                        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                            <Sheet>
+                                <SheetTrigger asChild>
+                                    <h1>Modifier le produit</h1>
+                                </SheetTrigger>
+                                <SheetContent>
+                                    <SheetHeader>
+                                        <SheetTitle>Modification du produit</SheetTitle>
+                                        <SheetDescription>
+                                            Make changes to your profile here. Click save when you're done.
+                                        </SheetDescription>
+                                    </SheetHeader>
+                                    <div className="grid gap-4 py-4">
+
+                                    </div>
+                                    <SheetFooter>
+                                        <SheetClose asChild>
+                                            <Button type="submit" className="bg-orange-500">Modifier le produit</Button>
+                                        </SheetClose>
+                                    </SheetFooter>
+                                </SheetContent>
+                            </Sheet>
+
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            Supprimer le produit
+                        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                            <Dialog>
+                                <DialogTrigger>Supprimer le produit</DialogTrigger>
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle>Êtes-vous absolument sûr ?</DialogTitle>
+                                        <DialogDescription>
+                                            Cette action ne peut être annulée. Cette action supprimera définitivement cet element.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <DialogFooter>
+                                        <Button variant='destructive'>Oui, supprimer</Button>
+                                    </DialogFooter>
+                                </DialogContent>
+
+                            </Dialog>
+
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
