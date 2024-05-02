@@ -6,6 +6,7 @@ import { LoginPage } from "@/views/LoginPage/Login";
 import { LoginPage1 } from "@/views/LoginPage/LoginPage1";
 import { Paramettre } from "@/views/Paramettre/Paramettre";
 import { Produit } from "@/views/Produits/Produit";
+import { Profile } from "@/views/Profil/Profile";
 import { createHashRouter } from "react-router-dom";
 
 export const AppRoute = createHashRouter([
@@ -30,6 +31,10 @@ export const AppRoute = createHashRouter([
                 path: "/paramettre",
                 element: <Paramettre />,
             },
+            {
+                path: '/profil',
+                element: <Profile />
+            }
 
         ],
     },

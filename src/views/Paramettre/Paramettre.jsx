@@ -10,72 +10,108 @@ import {
 } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { useState } from "react"
 import { Link } from "react-router-dom"
+import { Profile } from "../Profil/Profile"
 
 export function Paramettre() {
+    const [active, setActive] = useState({ index: 0, value: "GENERAL" })
+    const tab = [
+        {
+            label: 'General',
+            'link': '#',
+            value: 'GENERAL'
+        },
+        {
+            label: 'Mon profil',
+            'link': '#',
+            value: 'PROFILE'
+        },
+        {
+            label: 'Securité du compte',
+            'link': '#',
+            value: 'SECURITY'
+        },
+        {
+            label: 'Support technique',
+            'link': '#',
+            value: 'SUPPORT'
+        }
+    ]
     return (
         <div className="">
             <div className="mx-auto grid w-full max-w-6xl gap-2">
                 <h1 className="text-3xl font-extrabold">Paramettre</h1>
             </div>
             <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
-                <nav
-                    className="grid gap-4 text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0"
+                <div
+                    className="mt-2 grid text-sm text-muted-foreground"
                 >
-                    <Link href="#" className="font-semibold text-primary">
-                        General
-                    </Link>
-                    <Link href="#">Securité du compte</Link>
-                    <Link href="#">Mon profile</Link>
-                    <Link href="#">Support technique</Link>
-                </nav>
-                <div className="grid gap-6">
-                    <Card x-chunk="dashboard-04-chunk-1">
-                        <CardHeader>
-                            <CardTitle>Store Name</CardTitle>
-                            <CardDescription>
-                                Used to identify your store in the marketplace.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <form>
-                                <Input placeholder="Store Name" />
-                            </form>
-                        </CardContent>
-                        <CardFooter className="border-t px-6 py-4">
-                            <Button>Save</Button>
-                        </CardFooter>
-                    </Card>
-                    <Card x-chunk="dashboard-04-chunk-2">
-                        <CardHeader>
-                            <CardTitle>Plugins Directory</CardTitle>
-                            <CardDescription>
-                                The directory within your project, in which your plugins are
-                                located.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <form className="flex flex-col gap-4">
-                                <Input
-                                    placeholder="Project Name"
-                                    defaultValue="/content/plugins"
-                                />
-                                <div className="flex items-center space-x-2">
-                                    <Checkbox id="include" defaultChecked />
-                                    <label
-                                        htmlFor="include"
-                                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                    >
-                                        Allow administrators to change the directory.
-                                    </label>
-                                </div>
-                            </form>
-                        </CardContent>
-                        <CardFooter className="border-t px-6 py-4">
-                            <Button>Save</Button>
-                        </CardFooter>
-                    </Card>
+                    {
+                        tab.map((item, index) => (
+                            <Link onClick={() => {
+                                setActive({ index: index, value: item.value })
+                            }} key={index} to={item.link} className={`${active.index === index ? 'bg-gray-100 font-bold px-3 py-2 rounded-lg text-primary' : 'px-3 py-2 text-primary'}  `}>
+                                {item.label}
+                            </Link>
+                        ))
+                    }
                 </div>
+                {
+                    active.value === "GENERAL" ? (
+                        <div className="grid gap-6">
+                            <Card x-chunk="dashboard-04-chunk-1">
+                                <CardHeader>
+                                    <CardTitle>Store Name</CardTitle>
+                                    <CardDescription>
+                                        Used to identify your store in the marketplace.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <form>
+                                        <Input placeholder="Store Name" />
+                                    </form>
+                                </CardContent>
+                                <CardFooter className="border-t px-6 py-4">
+                                    <Button>Save</Button>
+                                </CardFooter>
+                            </Card>
+                            <Card x-chunk="dashboard-04-chunk-2">
+                                <CardHeader>
+                                    <CardTitle>Plugins Directory</CardTitle>
+                                    <CardDescription>
+                                        The directory within your project, in which your plugins are
+                                        located.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <form className="flex flex-col gap-4">
+                                        <Input
+                                            placeholder="Project Name"
+                                            defaultValue="/content/plugins"
+                                        />
+                                        <div className="flex items-center space-x-2">
+                                            <Checkbox id="include" defaultChecked />
+                                            <label
+                                                htmlFor="include"
+                                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                            >
+                                                Allow administrators to change the directory.
+                                            </label>
+                                        </div>
+                                    </form>
+                                </CardContent>
+                                <CardFooter className="border-t px-6 py-4">
+                                    <Button>Save</Button>
+                                </CardFooter>
+                            </Card>
+                        </div>
+                    ) : active.value === "PROFILE" ? (
+                        <Profile />
+                    ) : active.value === "SECURITY" ? '' : ''
+                }
+
+
             </div>
         </div>
     )
