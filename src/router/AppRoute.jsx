@@ -1,5 +1,6 @@
 import { BaseLayout } from "@/layout/BaseLayout";
 import { AjoutProduit } from "@/views/Ajout-produit/AjoutProduit";
+import { Clients } from "@/views/Client/Clients";
 import { Notfound } from "@/views/Error/Notfound";
 import { Dashboard } from "@/views/Home/Home1";
 import { LoginPage } from "@/views/LoginPage/Login";
@@ -34,6 +35,10 @@ export const AppRoute = createHashRouter([
             {
                 path: '/profil',
                 element: <Profile />
+            },
+            {
+                path: '/clients',
+                element: <Clients />
             }
 
         ],

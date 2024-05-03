@@ -2,9 +2,8 @@ import {
     ChevronLeft,
     ChevronRight,
     Copy,
-    CreditCard,
     MoreVertical,
-    Truck,
+    Truck
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"

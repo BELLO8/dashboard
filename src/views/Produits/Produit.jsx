@@ -7,10 +7,13 @@ import { Link } from "react-router-dom"
 export const Produit = () => {
     return (
         <>
-            <div className="flex max-w-6xl gap-2">
+            <div className="flex items-center gap-4">
                 <h1 className="w-full text-3xl font-extrabold">Liste des produits</h1>
-                <Link to={'/ajouter-produit'}><Button variant="outline">Ajouter un produit</Button></Link>
+                <div className="hidden items-center gap-2 md:ml-auto md:flex">
+                    <Link to={'/ajouter-produit'}><Button variant="outline">Ajouter un produit</Button></Link>
+                </div>
             </div>
+
 
             <Card className="border-none container mx-auto py-1">
                 <DataTable columns={columns} data={payments} />
