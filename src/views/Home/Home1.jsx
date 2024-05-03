@@ -6,14 +6,56 @@ import { Counter } from "@/components/Stats/Counter"
 import Order from "@/components/Widget/OrderWidget"
 import Sales from "@/components/Widget/Sales"
 import Transaction from "@/components/Widget/Transaction"
-import { Button } from "@/components/ui/button"
 import {
-    Card
+    Card,
+    CardDescription,
+    CardTitle
 } from "@/components/ui/card"
+import 'chart.js/auto'
+import { Bar } from "react-chartjs-2"
 import wallet from '../../assets/icons/Wallet.svg'
 import client from '../../assets/icons/client.svg'
 import commande from '../../assets/icons/commande.svg'
 export function Dashboard() {
+    const labels = ['janv', 'fev', 'mars', 'avril', 'mai', 'juin', 'juillet'];
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+        scales: {
+            y: {
+                display: false,
+            },
+            xAxes: [
+                {
+                    maxBarThickness: 100,
+                },
+            ],
+            x: {
+                grid: {
+                    display: false,
+                },
+            },
+        },
+    };
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: "Nombre courses",
+                data: [65, 59, 80, 81, 56, 55, 40],
+                backgroundColor: '#3a3637',
+                borderColor: 'white',
+                borderRadius: 4,
+                borderSkipped: false,
+            },
+
+        ],
+    };
+
     return (
         <div className="space-y-4">
             <div className="">
@@ -30,29 +72,26 @@ export function Dashboard() {
                 <Counter title={"Transactions"} count={'9857'} text={''} icon={wallet} />
             </div>
             <div className="grid grid-cols-2 gap-4">
+                <div className=" p-4 rounded-lg border border-dashed shadow-sm" >
+                    <div className="grid gap-2">
+                        <CardTitle>Chiffre d'affaire</CardTitle>
+                        <CardDescription>
+                            Recent transactions from your store.
+                        </CardDescription>
+                    </div>
+                    <Bar height={250} options={options} data={data} />
+                </div>
                 <Transaction />
-                <Sales />
             </div>
             <div className="grid grid-cols-2 gap-4">
-                <div
-                    className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm" x-chunk="dashboard-02-chunk-1"
-                >
 
-                    <div className="p-28 flex flex-col items-center gap-1 text-center">
-                        <h3 className="text-2xl font-bold tracking-tight">
-                            You have no products
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                            You can start selling as soon as you add a product.
-                        </p>
-                        <Button className="mt-4">Add Product</Button>
-                    </div>
-                </div>
+                <Sales />
                 <Order />
             </div>
             <Card className="container mx-auto py-4">
                 <DataTable columns={columns} data={payments} />
             </Card>
+
         </div>
 
     )

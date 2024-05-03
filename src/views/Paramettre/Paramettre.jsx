@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { ChevronLeft } from "lucide-react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Profile } from "../Profil/Profile"
@@ -40,7 +41,11 @@ export function Paramettre() {
     ]
     return (
         <div className="">
-            <div className="mx-auto grid w-full max-w-6xl gap-2">
+            <div className="mb-3 mx-auto my-auto flex items-center w-full max-w-6xl gap-4">
+                <Button variant="outline" size="icon" className="h-7 w-7" onClick={() => window.history.back()}>
+                    <ChevronLeft className="h-4 w-4" />
+                    <span className="sr-only">Back</span>
+                </Button>
                 <h1 className="text-3xl font-extrabold">Paramettre</h1>
             </div>
             <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">

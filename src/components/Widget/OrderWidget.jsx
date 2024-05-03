@@ -107,7 +107,7 @@ export default function Order() {
                         </li>
                     </ul>
                 </div>
-                <hr className="my-4" />
+                {/* <hr className="my-4" />
                 <div className="grid grid-cols-2 gap-4">
                     <div className="grid gap-3">
                         <div className="font-semibold">Shipping Information</div>
@@ -158,7 +158,7 @@ export default function Order() {
                             <dd>**** **** **** 4532</dd>
                         </div>
                     </dl>
-                </div>
+                </div> */}
             </CardContent>
             <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
                 <div className="text-xs text-muted-foreground">

@@ -96,10 +96,9 @@ export const Header = () => {
                 </form>
             </div>
             <h3 className="font-medium"> Acme Inc</h3>
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
                     <Button variant="secondary" size="icon" className="rounded-full">
-
                         <CircleUser className="h-5 w-5" />
                         <span className="sr-only">Toggle user menu</span>
                     </Button>
