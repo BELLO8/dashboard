@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
 import { TooltipProvider } from "./components/ui/tooltip";
 import "./index.css";
@@ -10,6 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <TooltipProvider>
+      <Toaster position="top-right" reverseOrder={false} />
       <RouterProvider router={AppRoute} />
     </TooltipProvider>
   </React.StrictMode>

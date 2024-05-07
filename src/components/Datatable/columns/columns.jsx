@@ -51,7 +51,7 @@ export const columns = [
         ),
     },
     {
-        accessorKey: "name",
+        accessorKey: "title",
         header: ({ column }) => {
             return (
                 <Button
@@ -61,6 +61,27 @@ export const columns = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Nom du produit
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => (
+            <div className="overflow-hidden">
+                <p className="text-xs line-clamp-2">{row.getValue('title')}</p>
+            </div>
+        ),
+    },
+    {
+        accessorKey: "category",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="-mx-3"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Categorie du produit
                     <CaretSortIcon className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -83,9 +104,14 @@ export const columns = [
 
             )
         },
+        cell: ({ row }) => (
+            <div className="bg-white w-fit border rounded-md px-2 py-1 overflow-hidden">
+                <p className="text-xs line-clamp-3">{row.getValue('description')}</p>
+            </div>
+        ),
     },
     {
-        accessorKey: "quantity",
+        accessorKey: "rating.rate",
         header: ({ column }) => {
             return (
                 <Button
@@ -94,20 +120,20 @@ export const columns = [
                     size="sm"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Quantité
+                    Note du produit
                     <CaretSortIcon className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
         cell: ({ row }) => (
-            <p className="bg-white w-fit border rounded-md px-2 text-xs font-extrabold text-orange-700 py-1 text-dark">{row.getValue("quantity")}</p>
+            <p className="bg-white w-fit border rounded-md px-2 text-xs font-extrabold text-orange-700 py-1 text-dark">{row.original.rating.rate}</p>
         ),
     },
     {
-        accessorKey: "amount",
+        accessorKey: "price",
         header: () => <div className="">Prix</div>,
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amount"))
+            const amount = parseFloat(row.getValue("price"))
             const formatted = new Intl.NumberFormat('fr', { style: 'currency', currency: 'XOF' }).format(amount)
 
             return <div className="font-medium">{formatted}</div>

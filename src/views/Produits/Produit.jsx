@@ -1,8 +1,5 @@
-import { columns } from "@/components/Datatable/columns/columns"
-import { payments } from "@/components/Datatable/data/payment"
-import { DataTable } from "@/components/Datatable/dataTable/Datatable"
+import { ProductDatatable } from "@/components/Product/ProductDatatable"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import { Link } from "react-router-dom"
 export const Produit = () => {
     return (
@@ -14,10 +11,8 @@ export const Produit = () => {
                 </div>
             </div>
 
+            <ProductDatatable />
 
-            <Card className="border-none container mx-auto py-1">
-                <DataTable columns={columns} data={payments} />
-            </Card>
         </>
     )
 }

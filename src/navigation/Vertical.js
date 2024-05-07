@@ -1,22 +1,22 @@
-import { Package, ShoppingCart, Users } from "lucide-react";
+import { Package, Users } from "lucide-react";
 
-import { DashboardIcon } from "@radix-ui/react-icons";
+import { ArchiveIcon, TokensIcon } from "@radix-ui/react-icons";
 
-export const navs = [
+export const Navs = [
   {
     name: "Tableau de bord",
     link: "/",
-    icon: <DashboardIcon />,
+    icon: <TokensIcon />,
   },
   {
     name: "Produits",
-    link: "/categorie-vehicule",
+    link: "/produits",
     icon: <Package className="h-4 w-4" />,
   },
   {
     name: "Commandes",
     link: "/commandes",
-    icon: <ShoppingCart className="h-4 w-4" />,
+    icon: <ArchiveIcon className="h-4 w-4" />,
   },
   {
     name: "Clients",

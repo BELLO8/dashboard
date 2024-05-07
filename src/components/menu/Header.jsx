@@ -1,8 +1,7 @@
 import {
     CircleUser,
     Menu,
-    Package2,
-    Search
+    Package2
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -13,6 +12,15 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+
+import {
+    CommandDialog,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList
+} from "@/components/ui/command"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,15 +29,47 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Navs } from "@/navigation/Vertical"
 import { LinkBreak2Icon } from "@radix-ui/react-icons"
+import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
-import { navs } from "./SideBarMenu"
 
 export const Header = () => {
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        const down = (e) => {
+            if (e.key === "q" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                setOpen((open) => !open)
+            }
+        }
+        document.addEventListener("keydown", down)
+        return () => document.removeEventListener("keydown", down)
+    }, [])
+
     return (
         <header className="relative sticky top-0 backdrop-blur-md flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 z-50">
+            <CommandDialog open={open} onOpenChange={setOpen} className="text-dark">
+                <CommandInput placeholder="Type a command or search..." />
+                <CommandList>
+                    <CommandEmpty>No results found.</CommandEmpty>
+                    <CommandGroup heading="Suggestions">
+                        {
+                            Navs.map((item) => (
+                                <Link to={item.link} onClick={() => setOpen(!open)}>
+                                    <CommandItem className="gap-2">
+                                        {item.icon}
+                                        {item.name}
+                                    </CommandItem>
+                                </Link>
+                            ))
+                        }
+
+                    </CommandGroup>
+                </CommandList>
+            </CommandDialog>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button
@@ -51,7 +91,7 @@ export const Header = () => {
                             <span className="sr-only">Acme Inc</span>
                         </Link>
                         {
-                            navs.map((navigation) => (
+                            Navs.map((navigation) => (
                                 <NavLink
                                     to={navigation.link}
                                     className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
@@ -86,22 +126,29 @@ export const Header = () => {
             <div className="w-full flex-1">
                 <form>
                     <div className="relative">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                        <Input
-                            type="search"
-                            placeholder="Recherche de pages..."
-                            className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-72"
-                        />
+                        <Button onClick={() => setOpen(!open)} variant='outline' className="relative flex justify-start  rounded-lg w-full shadow-none md:w-2/3 lg:w-72">
+                            Recherche de page...
+                            <p className="absolute right-8 flex items-center h-4 w-4 text-sm text-muted-foreground">
+                                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                                    <span className="text-xs">⌘</span>q
+                                </kbd>
+                            </p>
+                        </Button>
+
                     </div>
                 </form>
             </div>
-            <h3 className="font-medium"> Acme Inc</h3>
             <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="secondary" size="icon" className="rounded-full">
-                        <CircleUser className="h-5 w-5" />
-                        <span className="sr-only">Toggle user menu</span>
-                    </Button>
+                    <div className="flex items-center gap-2 cursor-pointer">
+                        <h3 className="font-medium"> Acme Inc</h3>
+                        <Button variant="secondary" size="icon" className="rounded-full">
+                            <CircleUser className="h-5 w-5" />
+                            <span className="sr-only">Toggle user menu</span>
+                        </Button>
+
+                    </div>
+
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Mon compte</DropdownMenuLabel>

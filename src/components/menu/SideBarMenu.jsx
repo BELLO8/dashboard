@@ -1,8 +1,6 @@
 import {
     Bell,
-    Package,
-    Package2,
-    Users
+    Package2
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -13,33 +11,9 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { ArchiveIcon, LinkBreak2Icon, TokensIcon } from "@radix-ui/react-icons"
+import { Navs } from "@/navigation/Vertical"
+import { LinkBreak2Icon } from "@radix-ui/react-icons"
 import { Link, NavLink } from "react-router-dom"
-
-export const navs = [
-    {
-        name: "Tableau de bord",
-        link: "/",
-        icon: <TokensIcon />,
-    },
-    {
-        name: "Produits",
-        link: "/produits",
-        icon: <Package className="h-4 w-4" />
-        ,
-    },
-    {
-        name: "Commandes",
-        link: "/commandes",
-        icon: <ArchiveIcon className="h-4 w-4" />
-    },
-    {
-        name: "Clients",
-        link: "/clients",
-        icon: <Users className="h-4 w-4" />
-        ,
-    },
-];
 
 export const SideBarMenu = () => {
 
@@ -59,7 +33,7 @@ export const SideBarMenu = () => {
                 <div className="flex-1">
                     <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
                         {
-                            navs.map((navigation) => (
+                            Navs.map((navigation) => (
                                 <NavLink
                                     to={navigation.link}
                                     className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"

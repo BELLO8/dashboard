@@ -1,4 +1,5 @@
 import { BackpackIcon, DragHandleDots2Icon } from "@radix-ui/react-icons"
+import { Button } from "../ui/button"
 import { Card, CardContent } from "../ui/card"
 
 export const Customer = ({ item }) => {
@@ -15,7 +16,11 @@ export const Customer = ({ item }) => {
                         <p className="text-xs gap-2 flex"><DragHandleDots2Icon />{item.phone}</p>
                         <p className="text-xs gap-2 flex"> <BackpackIcon />{item.email}</p>
                     </div>
+                    <div className="flex justify-center mt-8">
+                        <Button variant="secondary">Detail du client</Button>
+                    </div>
                 </CardContent>
+
             </Card>
         </>
     )

@@ -52,10 +52,10 @@ export const HomePage = () => {
             </aside>
             <div className="p-3 pt-8 grow min-h-screen">
                 <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-2 ">
-                    <Counter title={"Chiffre d'affaire"} count={'50 000 F CFA'} text={''} icon={wallet} />
-                    <Counter title={"Produits"} count={'387'} text={''} icon={wallet} />
-                    <Counter title={"Clients"} count={'147'} text={''} icon={wallet} />
-                    <Counter title={"Transactions"} count={'9857'} text={''} icon={wallet} />
+                    <Counter title={"Chiffre d'affaire"} count={'50 000 F CFA'} text={'+19% par rapport au mois dernier'} icon={wallet} />
+                    <Counter title={"Produits"} count={'387'} text={'+20,1% par rapport au mois dernier'} icon={wallet} />
+                    <Counter title={"Clients"} count={'147'} text={'+19% par rapport au mois dernier'} icon={wallet} />
+                    <Counter title={"Transactions"} count={'9857'} text={'+201 depuis la dernière heure'} icon={wallet} />
                 </div>
             </div>
 
