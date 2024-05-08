@@ -1,9 +1,13 @@
 import {
-    CircleUser,
     Menu,
     Package2
 } from "lucide-react"
 
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -12,7 +16,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-
 import {
     CommandDialog,
     CommandEmpty,
@@ -31,7 +34,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Navs } from "@/navigation/Vertical"
-import { LinkBreak2Icon } from "@radix-ui/react-icons"
+import { BellIcon, GearIcon, LinkBreak2Icon, LockClosedIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons"
 import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 
@@ -50,15 +53,15 @@ export const Header = () => {
     }, [])
 
     return (
-        <header className="relative sticky top-0 backdrop-blur-md flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 z-50">
+        <header className="relative sticky top-0 backdrop-blur-md flex h-14 items-center gap-4 border-b bg-white/75 px-4 lg:h-[60px] lg:px-6 z-50">
             <CommandDialog open={open} onOpenChange={setOpen} className="text-dark">
                 <CommandInput placeholder="Type a command or search..." />
                 <CommandList>
                     <CommandEmpty>No results found.</CommandEmpty>
                     <CommandGroup heading="Suggestions">
                         {
-                            Navs.map((item) => (
-                                <Link to={item.link} onClick={() => setOpen(!open)}>
+                            Navs.map((item, index) => (
+                                <Link key={index} to={item.link} onClick={() => setOpen(!open)}>
                                     <CommandItem className="gap-2">
                                         {item.icon}
                                         {item.name}
@@ -91,8 +94,9 @@ export const Header = () => {
                             <span className="sr-only">Acme Inc</span>
                         </Link>
                         {
-                            Navs.map((navigation) => (
+                            Navs.map((navigation, index) => (
                                 <NavLink
+                                    key={index}
                                     to={navigation.link}
                                     className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                                 >
@@ -141,20 +145,28 @@ export const Header = () => {
             <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
                     <div className="flex items-center gap-2 cursor-pointer">
-                        <h3 className="font-medium"> Acme Inc</h3>
-                        <Button variant="secondary" size="icon" className="rounded-full">
-                            <CircleUser className="h-5 w-5" />
-                            <span className="sr-only">Toggle user menu</span>
-                        </Button>
-
+                        <div className="px-4 border-r-2">
+                            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
+                                <BellIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle notifications</span>
+                            </Button>
+                        </div>
+                        <Avatar className="w-8 h-8">
+                            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                            <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                        <div>
+                            <h3 className="font-semibold"> Acme Inc</h3>
+                            <p className="text-gray-400 text-xs flex gap-1"><LockClosedIcon />admin</p>
+                        </div>
                     </div>
 
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Mon compte</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem><Link to={'/paramettre'}>Paramèttre</Link></DropdownMenuItem>
-                    <DropdownMenuItem>Support</DropdownMenuItem>
+                    <DropdownMenuItem><Link to={'/paramettre'} className="flex gap-2 items-center"><GearIcon /> Paramèttre</Link></DropdownMenuItem>
+                    <DropdownMenuItem className="gap-2"><QuestionMarkCircledIcon /> Support</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </header>

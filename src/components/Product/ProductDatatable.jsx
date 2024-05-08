@@ -12,7 +12,7 @@ export const ProductDatatable = () => {
         getData.products()
     }, [])
     return (
-        <Card className="container mx-auto py-4">
+        <Card className="border-none shadow-none px-4">
             <DataTable columns={columns} data={getData?.data} />
         </Card>
     )

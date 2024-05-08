@@ -57,7 +57,7 @@ export const Clients = () => {
                 </div>
             </div>
             <div className="mt-12 flex max-w-6xl gap-2 w-96">
-                <Input placeholder="Rechercher element ..." onChange={(e) => {
+                <Input className="bg-white" placeholder="Rechercher element ..." onChange={(e) => {
                     setCustomer(customer.filter((item) => {
                         return item.name.toLowerCase().includes(e.target.value.toLowerCase());
                     }));

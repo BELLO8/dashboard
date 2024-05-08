@@ -46,7 +46,7 @@ export function Paramettre() {
                     <ChevronLeft className="h-4 w-4" />
                     <span className="sr-only">Back</span>
                 </Button>
-                <h1 className="text-3xl font-extrabold">Paramettre</h1>
+                <h1 className="text-3xl font-extrabold text-primary">Paramettre</h1>
             </div>
             <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
                 <div
@@ -56,7 +56,7 @@ export function Paramettre() {
                         tab.map((item, index) => (
                             <Link onClick={() => {
                                 setActive({ index: index, value: item.value })
-                            }} key={index} to={item.link} className={`${active.index === index ? 'bg-gray-100 font-bold px-3 py-2 rounded-lg text-primary' : 'px-3 py-2 text-primary'}  `}>
+                            }} key={index} to={item.link} className={`${active.index === index ? 'bg-gray-100 font-bold px-3 py-2 rounded-lg text-primary' : 'px-3 py-2 text-slate-900'}  `}>
                                 {item.label}
                             </Link>
                         ))

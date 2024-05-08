@@ -1,26 +1,26 @@
-import { Package, Users } from "lucide-react";
-
-import { ArchiveIcon, TokensIcon } from "@radix-ui/react-icons";
-
+import { HomeIcon } from "@/components/Icons/HomeIcon";
+import { OrderIcon } from "@/components/Icons/OrderIcon";
+import { ProductIcon } from "@/components/Icons/ProductIcon";
+import { UserIcon } from "@/components/Icons/UserIcon";
 export const Navs = [
   {
     name: "Tableau de bord",
     link: "/",
-    icon: <TokensIcon />,
+    icon: <HomeIcon />,
   },
   {
     name: "Produits",
     link: "/produits",
-    icon: <Package className="h-4 w-4" />,
+    icon: <ProductIcon />,
   },
   {
     name: "Commandes",
     link: "/commandes",
-    icon: <ArchiveIcon className="h-4 w-4" />,
+    icon: <OrderIcon />,
   },
   {
     name: "Clients",
     link: "/clients",
-    icon: <Users className="h-4 w-4" />,
+    icon: <UserIcon />,
   },
 ];
